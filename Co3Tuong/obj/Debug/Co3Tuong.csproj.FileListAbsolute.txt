@@ -1,0 +1,17 @@
+E:\Nam3\Ki II\C#\Co3Tuong\Co3Tuong\bin\Debug\Co3Tuong.exe.config
+E:\Nam3\Ki II\C#\Co3Tuong\Co3Tuong\bin\Debug\Co3Tuong.exe
+E:\Nam3\Ki II\C#\Co3Tuong\Co3Tuong\bin\Debug\Co3Tuong.pdb
+E:\Nam3\Ki II\C#\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.Form1.resources
+E:\Nam3\Ki II\C#\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.Properties.Resources.resources
+E:\Nam3\Ki II\C#\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.csproj.GenerateResource.Cache
+E:\Nam3\Ki II\C#\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.exe
+E:\Nam3\Ki II\C#\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.pdb
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\bin\Debug\Co3Tuong.exe.config
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.exe
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.pdb
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\bin\Debug\Co3Tuong.exe
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\bin\Debug\Co3Tuong.pdb
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.csprojResolveAssemblyReference.cache
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.Form1.resources
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.Properties.Resources.resources
+E:\Document\Draft\Co3Tuong\Co3Tuong\Co3Tuong\obj\Debug\Co3Tuong.csproj.GenerateResource.Cache

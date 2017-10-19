@@ -1,0 +1,9 @@
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\obj\Debug\AsiaChess.Form1.resources
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\obj\Debug\AsiaChess.Properties.Resources.resources
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\obj\Debug\AsiaChess.csproj.GenerateResource.Cache
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\obj\Debug\Chess.exe
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\obj\Debug\Chess.pdb
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\bin\Debug\Chess.exe.config
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\bin\Debug\Chess.exe
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\bin\Debug\Chess.pdb
+E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\obj\Debug\AsiaChess.csprojResolveAssemblyReference.cache
