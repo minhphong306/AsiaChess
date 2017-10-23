@@ -9,16 +9,16 @@ using System.Windows.Forms;
 
 namespace AsiaChess
 {
-    class AsiaChessButton : Button
+    public class AsiaChessButton : Button
     {
        
         private Rectangle borderRectangle;
-        private bool active ;
         private StringFormat stringFormat = new StringFormat();
+        public int ChessValue { get; set; }
 
         public AsiaChessButton()
         {
-            this.Paint += QuanCo_Paint;
+            this.Paint += AsiaChessButton_Paint;
         }
         GraphicsPath GetRoundPath(RectangleF Rect, int radius)
         {
@@ -40,7 +40,7 @@ namespace AsiaChess
             graphicsPath.CloseFigure();
             return graphicsPath;
         }
-        private void QuanCo_Paint(object sender, PaintEventArgs e)
+        private void AsiaChessButton_Paint(object sender, PaintEventArgs e)
         {
             
             borderRectangle = new Rectangle(0, 0, Width, Height);
