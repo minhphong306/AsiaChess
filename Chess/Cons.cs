@@ -24,6 +24,7 @@ namespace AsiaChess {
         public static Color SELECTED_COLOR = Color.Purple;
         public static Color HINT_COLOR = Color.Yellow;
         public static Color HINT_EAT_COLOR = Color.Black;
+        public static Color JUST_MOVE_COLOR = Color.Green;
 
         public const int EMPTY_VALUE = 0;
         public const int BOSS_VALUE = 2;
