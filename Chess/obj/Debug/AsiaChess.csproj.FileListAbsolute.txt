@@ -7,3 +7,12 @@ E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\bin\Debug\Chess.exe.config
 E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\bin\Debug\Chess.exe
 E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\bin\Debug\Chess.pdb
 E:\Document\Draft\Co3Tuong\Co3Tuong\Chess\obj\Debug\AsiaChess.csprojResolveAssemblyReference.cache
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\bin\Debug\Chess.exe.config
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\bin\Debug\Chess.exe
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\bin\Debug\Chess.pdb
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\obj\Debug\AsiaChess.csprojResolveAssemblyReference.cache
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\obj\Debug\AsiaChess.Form1.resources
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\obj\Debug\AsiaChess.Properties.Resources.resources
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\obj\Debug\AsiaChess.csproj.GenerateResource.Cache
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\obj\Debug\Chess.exe
+D:\GGD\Work\MP\Project\C# Project\AsiaChess\Chess\obj\Debug\Chess.pdb

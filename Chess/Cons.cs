@@ -33,7 +33,10 @@ namespace AsiaChess {
         public static Color BOSS_COLOR = Color.Red;
         public static Color EMPTY_COLOR = Color.Transparent;
         public static Color SELECTED_COLOR = Color.Purple;
-        public static Color HI = Color.Yellow;
+        public static Color HINT_COLOR = Color.Yellow;
+
+        public const int SHOW_HINT = 1;
+        public const int REMOVE_HINT = 2;
 
         public static int[,] map = {
                                       {1, 1, 1, 1, 1 },
