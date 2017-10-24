@@ -16,9 +16,14 @@ namespace AsiaChess {
         public const int SMALL_DIAMON_HEIGH = 2;
         public const int BOARD_WIDTH = 5;
         public const int BOARD_HEIGH = 7;
-
-
         public const int CHESS_SIZE = 50;
+
+        public static Color CHESS_COLOR = Color.Blue;
+        public static Color BOSS_COLOR = Color.Red;
+        public static Color EMPTY_COLOR = Color.Transparent;
+        public static Color SELECTED_COLOR = Color.Purple;
+        public static Color HINT_COLOR = Color.Yellow;
+        public static Color HINT_EAT_COLOR = Color.Black;
 
         public const int EMPTY_VALUE = 0;
         public const int BOSS_VALUE = 2;
@@ -28,15 +33,11 @@ namespace AsiaChess {
         public const int GM_TWO_PLAYER = 1;
         public const int GM_AI = 2;
 
-
-        public static Color CHESS_COLOR = Color.Blue;
-        public static Color BOSS_COLOR = Color.Red;
-        public static Color EMPTY_COLOR = Color.Transparent;
-        public static Color SELECTED_COLOR = Color.Purple;
-        public static Color HINT_COLOR = Color.Yellow;
-
         public const int SHOW_HINT = 1;
         public const int REMOVE_HINT = 2;
+
+        public const int CHESS_TURN = 1;
+        public const int BOSS_TURN = 2;
 
         public static int[,] map = {
                                       {1, 1, 1, 1, 1 },

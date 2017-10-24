@@ -16,12 +16,13 @@ namespace AsiaChess
         public AsiaChessButton selected_chess;
         public AsiaChessButton[,] chessMatrix;
         public List<AsiaChessButton> hintChesses;
+        public List<AsiaChessButton> hintEatChesses;
         private int GAME_MODE;
 
         public ChessBoardManager(Form _mainForm)
         {
             mainForm = _mainForm;
-            hintChesses = new List<AsiaChessButton>();
+            
         }
 
         public void NewGame(int GameMode)
@@ -36,6 +37,9 @@ namespace AsiaChess
         #region Draw function
         public void DrawChessPanel()
         {
+            hintChesses = new List<AsiaChessButton>();
+            hintEatChesses = new List<AsiaChessButton>();
+            selected_chess = null;
 
             chessPanel = new Panel();
             //chessPanel.Enabled = false;
@@ -214,9 +218,31 @@ namespace AsiaChess
             
         }
 
+        public void PaintHintEatChess(int MODE)
+        {
+            switch (MODE)
+            {
+                case Cons.SHOW_HINT:
+                    foreach (var chess in hintEatChesses)
+                    {
+                        chess.BackColor = Cons.HINT_EAT_COLOR;
+                        chess.Text = "hint";
+                    }
+                    break;
+                case Cons.REMOVE_HINT:
+                    foreach (var chess in hintEatChesses)
+                    {
+                        chess.BackColor = chess.MyOriginColor;
+                        chess.Text = "rm_hint";
+                    }
+                    break;
+            }
+
+        }
+
         #endregion
 
-        #region Check move function
+        #region Check move function: getListMove, getListEat
         private bool checkValidMove(Point first, Point last)
         {
             if ((first.X + first.Y) % 2 != 0 && (last.X + last.Y) % 2 != 0)
@@ -280,6 +306,22 @@ namespace AsiaChess
             return moves;
         }
 
+        public List<AsiaChessButton> getListEat(int i, int j)
+        {
+            List<AsiaChessButton> eats = new List<AsiaChessButton>();
+            foreach (var chess in hintChesses)
+            {
+                int a1 = chess.RowIndex - i;
+                int a2 = chess.ColIndex - j;
+
+                if ((chess.RowIndex + a1 < 7) && (chess.RowIndex + a1 >= 0)
+                    && (chess.ColIndex + a2 < 5) && (chess.ColIndex + a2 >= 0)
+                    && Cons.map[chess.RowIndex + a1, chess.ColIndex + a2] == 1)
+
+                    eats.Add(chessMatrix[chess.RowIndex + a1, chess.ColIndex + a2]);
+            }
+            return eats;
+        }
         #endregion
 
         private void Chess_Click(object sender, EventArgs e)
@@ -302,6 +344,12 @@ namespace AsiaChess
                 hintChesses = getListMove(i, j);
                 PaintHintChess(Cons.SHOW_HINT);
 
+                if (current_chess.isBoss())
+                {
+                    hintEatChesses = getListEat(i, j);
+                    PaintHintEatChess(Cons.SHOW_HINT);
+                }
+
                 return;
             }
 
@@ -317,6 +365,11 @@ namespace AsiaChess
                 selected_chess.BackColor = selected_chess.MyOriginColor;
                 selected_chess = null;
                 PaintHintChess(Cons.REMOVE_HINT);
+
+                if (current_chess.isBoss())
+                {
+                    PaintHintEatChess(Cons.REMOVE_HINT);
+                }
                 return;
             }
 
@@ -327,11 +380,18 @@ namespace AsiaChess
                 selected_chess = current_chess;
                 selected_chess.BackColor = Cons.SELECTED_COLOR;
                 PaintHintChess(Cons.REMOVE_HINT);
+                PaintHintEatChess(Cons.REMOVE_HINT);
 
                 int i = selected_chess.RowIndex;
                 int j = selected_chess.ColIndex;
                 hintChesses = getListMove(i, j);
                 PaintHintChess(Cons.SHOW_HINT);
+
+                if (current_chess.isBoss())
+                {
+                    hintEatChesses = getListEat(i, j);
+                    PaintHintEatChess(Cons.SHOW_HINT);
+                }
             }
 
             // Move chess
@@ -339,7 +399,7 @@ namespace AsiaChess
             {
 
                 // Only move if in hint list
-                if (hintChesses.Contains(current_chess))
+                if (hintChesses.Contains(current_chess) || hintEatChesses.Contains(current_chess))
                 {
 
                     if (selected_chess.isBoss())
