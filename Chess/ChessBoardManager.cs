@@ -39,7 +39,7 @@ namespace AsiaChess {
             chessPanel.Height = boardHeight;
             chessPanel.Location = new Point(20, 20);
             chessPanel.Paint += ChessPanel_Paint;
-           
+
             mainForm.Controls.Add(chessPanel);
         }
 
@@ -113,22 +113,26 @@ namespace AsiaChess {
                     AsiaChessButton chess = new AsiaChessButton() {
                         Location = location,
                         Size = new Size(Cons.CHESS_SIZE, Cons.CHESS_SIZE),
-                        FlatStyle = FlatStyle.Popup,
-                        BackColor = Color.Transparent
+                        FlatStyle = FlatStyle.Popup
 
                     };
 
 
                     if (Cons.map[i, j] == Cons.CHESS_VALUE) {
-                        chess.BackColor = Color.Blue;
+                        chess.BackColor = Cons.CHESS_COLOR;
+                        chess.MyOriginColor = Cons.CHESS_COLOR;
                         chess.ChessValue = Cons.CHESS_VALUE;
+
                     }
                     else if (Cons.map[i, j] == Cons.BOSS_VALUE) {
-                        chess.BackColor = Color.Red;
+                        chess.BackColor = Cons.BOSS_COLOR;
+                        chess.MyOriginColor = Cons.BOSS_COLOR;
                         chess.ChessValue = Cons.BOSS_VALUE;
                     }
                     else if (Cons.map[i, j] == Cons.EMPTY_VALUE) {
-                        chess.FlatAppearance.BorderSize = 0;
+                        //chess.FlatAppearance.BorderSize = 0;
+                        chess.BackColor = Cons.EMPTY_COLOR;
+                        chess.MyOriginColor = Cons.EMPTY_COLOR;
                         chess.ChessValue = Cons.EMPTY_VALUE;
                     }
                     else {
@@ -139,63 +143,141 @@ namespace AsiaChess {
                     chess.Click += Chess_Click;
                     this.chessPanel.Controls.Add(chess);
 
+                    chess.RowIndex = i;
+                    chess.ColIndex = j;
                     chessMatrix[i, j] = chess;
                 }
             }
         }
+
         #endregion
 
+        #region Util function: getEmptyChess
+        public AsiaChessButton getEmptyChess(int rowIndex, int colIndex) {
+            Point location = new Point(Cons.MARGIN + colIndex * Cons.CELL_SIZE - Cons.CHESS_SIZE / 2, Cons.MARGIN + rowIndex * Cons.CELL_SIZE - Cons.CHESS_SIZE / 2);
+            AsiaChessButton chess = new AsiaChessButton() {
+                Location = location,
+                Size = new Size(Cons.CHESS_SIZE, Cons.CHESS_SIZE),
+                FlatStyle = FlatStyle.Popup
+
+            };
+            chess.BackColor = Cons.EMPTY_COLOR;
+            chess.MyOriginColor = Cons.EMPTY_COLOR;
+            chess.ChessValue = Cons.EMPTY_VALUE;
+            return chess;
+        }
+        #endregion
 
         private void Chess_Click(object sender, EventArgs e) {
             AsiaChessButton current_chess = sender as AsiaChessButton;
 
-            if (selected_chess == null) {
-                selected_chess = current_chess;
-                selected_chess.BackColor = Color.Purple;
+            // First click on empty chess
+            if (selected_chess == null && current_chess.isEmptyChess()) {
                 return;
             }
 
+            // First click on boss or chess
+            if (selected_chess == null && !current_chess.isEmptyChess()) {
+                selected_chess = current_chess;
+                selected_chess.BackColor = Cons.SELECTED_COLOR;
+                return;
+            }
+
+            // Click two empty chess
+            if (selected_chess.isEmptyChess() && current_chess.isEmptyChess()) {
+                return;
+            }
+
+            // Re-click chess (unselected)
             if (selected_chess == current_chess) {
+                selected_chess.BackColor = selected_chess.MyOriginColor;
                 selected_chess = null;
-                switch (current_chess.ChessValue) {
-                    case Cons.CHESS_VALUE:
-                        current_chess.BackColor = Cons.CHESS_COLOR;
-                        break;
-                    case Cons.BOSS_VALUE:
-                        current_chess.BackColor = Cons.BOSS_COLOR;
-                        break;
-                  
-                }
                 return;
             }
 
+            // Change selected
             if (selected_chess.ChessValue == current_chess.ChessValue) {
-                switch (selected_chess.ChessValue) {
-                    case Cons.CHESS_VALUE:
-                        selected_chess.BackColor = Cons.CHESS_COLOR;
-                        break;
-                    case Cons.BOSS_VALUE:
-                        selected_chess.BackColor = Cons.BOSS_COLOR;
-                        break;
-
-                }
-                current_chess.BackColor = Cons.SELECTED_COLOR;
+                selected_chess.BackColor = selected_chess.MyOriginColor;
                 selected_chess = current_chess;
+                selected_chess.BackColor = Cons.SELECTED_COLOR;
             }
 
-            if (selected_chess.ChessValue != Cons.EMPTY_VALUE && current_chess.ChessValue == Cons.EMPTY_VALUE) {
-                switch (selected_chess.ChessValue) {
-                    case Cons.CHESS_VALUE:
-                        current_chess.BackColor = Cons.CHESS_COLOR;
-                        break;
-                    case Cons.BOSS_VALUE:
-                        current_chess.BackColor = Cons.BOSS_COLOR;
-                        break;
+            // Move chess
+            if (!selected_chess.isEmptyChess() && current_chess.isEmptyChess()) {
+                //AsiaChessButton tmp_chess = selected_chess;
+                //current_chess = selected_chess;
+                //int rowIndex = selected_chess.RowIndex;
+                //int colIndex = selected_chess.ColIndex;
 
+                //AsiaChessButton empty_chess = getEmptyChess(rowIndex, colIndex);
+                //selected_chess.Dispose();
+                //chessPanel.Controls.Add(empty_chess);
+
+                if (selected_chess.isBoss()) {
+                    current_chess.ChessValue = Cons.BOSS_VALUE;
+                    current_chess.BackColor = Cons.BOSS_COLOR;
+                   // current_chess.changeToBoss();
                 }
-                selected_chess.BackColor = Color.Transparent;
+                else {
+                    current_chess.ChessValue = Cons.CHESS_VALUE;
+                    current_chess.BackColor = Cons.CHESS_COLOR;
+                    //current_chess.changeToChess();
+                }
+                selected_chess.ChessValue = Cons.EMPTY_VALUE;
+                selected_chess.BackColor = Cons.EMPTY_COLOR;
+                //selected_chess.changeToEmpty();
                 
             }
+            #region Old code
+            //if (selected_chess == null) {
+            //    selected_chess = current_chess;
+            //    selected_chess.BackColor = Color.Purple;
+            //    return;
+            //}
+
+            //if (selected_chess == current_chess) {
+            //    selected_chess = null;
+            //    switch (current_chess.ChessValue) {
+            //        case Cons.CHESS_VALUE:
+            //            current_chess.BackColor = Cons.CHESS_COLOR;
+            //            break;
+            //        case Cons.BOSS_VALUE:
+            //            current_chess.BackColor = Cons.BOSS_COLOR;
+            //            break;
+
+            //    }
+            //    return;
+            //}
+
+            //if (selected_chess.ChessValue == current_chess.ChessValue) {
+            //    switch (selected_chess.ChessValue) {
+            //        case Cons.CHESS_VALUE:
+            //            selected_chess.BackColor = Cons.CHESS_COLOR;
+            //            break;
+            //        case Cons.BOSS_VALUE:
+            //            selected_chess.BackColor = Cons.BOSS_COLOR;
+            //            break;
+
+            //    }
+            //    current_chess.BackColor = Cons.SELECTED_COLOR;
+            //    selected_chess = current_chess;
+            //}
+
+            //if (selected_chess.ChessValue != Cons.EMPTY_VALUE && current_chess.ChessValue == Cons.EMPTY_VALUE) {
+            //    switch (selected_chess.ChessValue) {
+            //        case Cons.CHESS_VALUE:
+            //            current_chess.BackColor = Cons.CHESS_COLOR;
+            //            break;
+            //        case Cons.BOSS_VALUE:
+            //            current_chess.BackColor = Cons.BOSS_COLOR;
+            //            break;
+
+            //    }
+            //    selected_chess.BackColor = Color.Transparent;
+
+            //}
+            #endregion
+
         }
     }
 }

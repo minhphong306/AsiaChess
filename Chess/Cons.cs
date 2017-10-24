@@ -31,6 +31,7 @@ namespace AsiaChess {
 
         public static Color CHESS_COLOR = Color.Blue;
         public static Color BOSS_COLOR = Color.Red;
+        public static Color EMPTY_COLOR = Color.Transparent;
         public static Color SELECTED_COLOR = Color.Purple;
         public static Color HI = Color.Yellow;
 

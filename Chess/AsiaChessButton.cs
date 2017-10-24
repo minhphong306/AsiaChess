@@ -15,6 +15,9 @@ namespace AsiaChess
         private Rectangle borderRectangle;
         private StringFormat stringFormat = new StringFormat();
         public int ChessValue { get; set; }
+        public Color MyOriginColor { get; set; }
+        public int RowIndex { get; set; }
+        public int ColIndex { get; set; }
 
         public AsiaChessButton()
         {
@@ -76,6 +79,33 @@ namespace AsiaChess
                 format);
 
           
+        }
+
+        public bool isEmptyChess() {
+            return ChessValue == Cons.EMPTY_VALUE;
+        }
+
+        public bool isBoss() {
+            return ChessValue == Cons.BOSS_VALUE;
+        }
+
+        public bool isChess() {
+            return ChessValue == Cons.CHESS_VALUE;
+        }
+
+        public void changeToEmpty() {
+            this.MyOriginColor = Cons.EMPTY_COLOR;
+            this.ChessValue = Cons.EMPTY_VALUE;
+        }
+
+        public void changeToBoss() {
+            this.MyOriginColor = Cons.BOSS_COLOR;
+            this.ChessValue = Cons.BOSS_VALUE;
+        }
+
+        public void changeToChess() {
+            this.MyOriginColor = Cons.CHESS_COLOR;
+            this.ChessValue = Cons.CHESS_VALUE;
         }
 
     }
