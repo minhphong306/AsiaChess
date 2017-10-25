@@ -40,6 +40,9 @@ namespace AsiaChess {
         public const int CHESS_TURN = 1;
         public const int BOSS_TURN = 2;
 
+        public const string CHESS_TURN_STR = "Lượt quân";
+        public const string BOSS_TURN_STR = "Lượt tướng";
+
         public static int[,] map = {
                                       {1, 1, 1, 1, 1 },
                                       {1, 1, 0, 1, 1 },

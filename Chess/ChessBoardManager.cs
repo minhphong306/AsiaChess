@@ -10,13 +10,21 @@ namespace AsiaChess {
     public class ChessBoardManager {
         public Form mainForm { get; set; }
         public Panel chessPanel { get; set; }
+        public Label lbGameMode { get; set; }
+        public Label lbTurn { get; set; }
+        public Label lbChessNumber { get; set; }
+
 
         public AsiaChessButton selected_chess;
         public AsiaChessButton[,] chessMatrix;
         public List<AsiaChessButton> hintChesses;
         public List<AsiaChessButton> hintEatChesses;
         public List<AsiaChessButton> justMoveChesses;
+
         private int GAME_MODE;
+        private int GAME_TURN;
+        private int CHESS_NUMBER;
+        private int TOTAL_CHESS_NUMBER = 19;
 
         public ChessBoardManager(Form _mainForm) {
             mainForm = _mainForm;
@@ -28,7 +36,23 @@ namespace AsiaChess {
             chessPanel.Controls.Clear();
             // Draw
             DrawChess();
-            //chessPanel.Enabled = true;
+            chessPanel.Enabled = true;
+            GAME_TURN = Cons.BOSS_TURN;
+            CHESS_NUMBER = 19;
+
+            switch (GameMode) {
+                case Cons.GM_AI:
+                    lbGameMode.Text = "Người và máy";
+                    break;
+                case Cons.GM_TWO_PLAYER:
+                    lbGameMode.Text = "Hai người chơi";
+                    break;
+                default:
+                    break;
+            }
+
+            lbTurn.Text = Cons.BOSS_TURN_STR;
+            lbChessNumber.Text = CHESS_NUMBER + "/" + TOTAL_CHESS_NUMBER;
         }
 
         #region Draw function
@@ -164,7 +188,7 @@ namespace AsiaChess {
 
         #endregion
 
-        #region Util function: getEmptyChess, PaintHintChess, PaintEatHintChess, RemoveAllHint, removeAllJustMove
+        #region Util function: getEmptyChess, changeTurn, PaintHintChess, PaintEatHintChess, RemoveAllHint, removeAllJustMove
         public AsiaChessButton getEmptyChess(int rowIndex, int colIndex) {
             Point location = new Point(Cons.MARGIN + colIndex * Cons.CELL_SIZE - Cons.CHESS_SIZE / 2, Cons.MARGIN + rowIndex * Cons.CELL_SIZE - Cons.CHESS_SIZE / 2);
             AsiaChessButton chess = new AsiaChessButton() {
@@ -179,18 +203,20 @@ namespace AsiaChess {
             return chess;
         }
 
+        public void ChangeTurn() {
+            GAME_TURN = (GAME_TURN == Cons.BOSS_TURN ? Cons.CHESS_TURN : Cons.BOSS_TURN);
+        }
+
         public void PaintHintChess(int MODE) {
             switch (MODE) {
                 case Cons.SHOW_HINT:
                     foreach (var chess in hintChesses) {
                         chess.BackColor = Cons.HINT_COLOR;
-                        chess.Text = "hint";
                     }
                     break;
                 case Cons.REMOVE_HINT:
                     foreach (var chess in hintChesses) {
                         chess.BackColor = chess.MyOriginColor;
-                        chess.Text = "rm_hint";
                     }
                     break;
             }
@@ -202,13 +228,11 @@ namespace AsiaChess {
                 case Cons.SHOW_HINT:
                     foreach (var chess in hintEatChesses) {
                         chess.BackColor = Cons.HINT_EAT_COLOR;
-                        chess.Text = "hint";
                     }
                     break;
                 case Cons.REMOVE_HINT:
                     foreach (var chess in hintEatChesses) {
                         chess.BackColor = chess.MyOriginColor;
-                        chess.Text = "rm_hint";
                     }
                     break;
             }
@@ -305,6 +329,15 @@ namespace AsiaChess {
         private void Chess_Click(object sender, EventArgs e) {
             AsiaChessButton current_chess = sender as AsiaChessButton;
 
+            #region Check valid turn
+            if (
+                (current_chess.isBoss() && GAME_TURN != Cons.BOSS_TURN)
+            || (current_chess.isChess() && GAME_TURN != Cons.CHESS_TURN)
+                ) {
+                return;
+            }
+            #endregion
+
             #region First click on empty chess
             if (selected_chess == null && current_chess.isEmptyChess()) {
                 return;
@@ -389,6 +422,7 @@ namespace AsiaChess {
                 selected_chess.MyOriginColor = Cons.EMPTY_COLOR;
 
                 selected_chess = null;
+                ChangeTurn();
                 return;
             }
             #endregion
@@ -410,6 +444,7 @@ namespace AsiaChess {
                 current_chess.BackColor = Cons.BOSS_COLOR;
 
                 selected_chess = null;
+                ChangeTurn();
                 return;
             }
             #endregion
