@@ -1,5 +1,4 @@
 # AsiaChess
 A Vietnamese traditional game integrated with simple arfiticial intelligent algorithm: Minimax algorithm
 
-
-![Asia Chess](https://imgur.com/aEfIYnz)
+[Imgur](https://i.imgur.com/aEfIYnz.png)
